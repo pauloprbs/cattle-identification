@@ -1,7 +1,18 @@
+# Manipulação e Análise de Dados
 pandas
 numpy
 matplotlib
+seaborn
+
+# Processamento de Imagem
 opencv-python
 pillow
+
+# Deep Learning (YOLOv8)
+ultralytics
+torch
+torchvision
+tqdm
+
+# Ambiente de Desenvolvimento
 jupyter
-seaborn

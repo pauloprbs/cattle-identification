@@ -209,3 +209,17 @@ __marimo__/
 # Projeto
 data/raw/
 .ipynb_checkpoints/
+
+# Dados gerados e processados
+data/yolo_dataset/
+data/processed/biometria_animais.csv
+
+# Resultados de treinamento e pesos do modelo
+notebooks/runs/
+notebooks/*.pt
+notebooks/cow_pose.yaml
+
+# Ambiente virtual e cache (caso não tenha)
+venv/
+__pycache__/
+.ipynb_checkpoints/
