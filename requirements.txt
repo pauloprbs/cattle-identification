@@ -8,11 +8,19 @@ seaborn
 opencv-python
 pillow
 
+# Busca de hiperparametros
+optuna
+
+# Machine Learning
+scikit-learn
+xgboost
+
 # Deep Learning (YOLOv8)
 ultralytics
 torch
 torchvision
 tqdm
+tensorflow
 
 # Ambiente de Desenvolvimento
 jupyter
