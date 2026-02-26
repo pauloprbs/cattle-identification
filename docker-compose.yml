@@ -1,7 +1,7 @@
-version: '3.8'
 services:
-  tf-gpu:
+  cattle-identification:
     build: .
+    container_name: cattle_ai_env
     volumes:
       - .:/tf/notebooks
     ports:
@@ -13,3 +13,12 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
+    # Inicia o Jupyter automaticamente sem pedir senha/token no localhost
+    command: >
+      jupyter notebook 
+      --ip=0.0.0.0 
+      --port=8888 
+      --no-browser 
+      --allow-root 
+      --NotebookApp.token='' 
+      --NotebookApp.password=''

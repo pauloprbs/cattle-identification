@@ -1,26 +1,18 @@
-# Manipulação e Análise de Dados
-pandas
-numpy
+# Essenciais para notebooks e dados
+pandas==2.2.1
+numpy<2.0.0
 matplotlib
 seaborn
-
-# Processamento de Imagem
-opencv-python
-pillow
-
-# Busca de hiperparametros
-optuna
-
-# Machine Learning
 scikit-learn
-xgboost
+scipy
+ipykernel
 
-# Deep Learning (YOLOv8)
-ultralytics
-torch
-torchvision
+# Visão Computacional e IA
+opencv-python-headless
+ultralytics==8.2.0
+tensorflow[and-cuda]==2.16.1
+keras>=3.0
+
+# Utilitários
+pathlib
 tqdm
-tensorflow
-
-# Ambiente de Desenvolvimento
-jupyter
