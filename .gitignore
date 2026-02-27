@@ -223,3 +223,13 @@ notebooks/cow_pose.yaml
 venv/
 __pycache__/
 .ipynb_checkpoints/
+
+# Sistema e Lixeira
+.Trash-*/
+.Trash-0/
+
+# Resultados de Modelagem e Tuner
+notebooks/tuner_logs/
+notebooks/tuner_results/
+*.weights.h5
+*.json

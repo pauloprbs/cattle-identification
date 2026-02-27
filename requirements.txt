@@ -7,6 +7,9 @@ scikit-learn
 scipy
 ipykernel
 
+# Machine Learning
+xgboost
+
 # Visão Computacional e IA
 opencv-python-headless
 ultralytics==8.2.0
