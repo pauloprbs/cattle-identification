@@ -4,6 +4,7 @@ numpy<2.0.0
 matplotlib
 seaborn
 scikit-learn
+scikit-image
 scipy
 ipykernel
 
@@ -12,7 +13,7 @@ xgboost
 
 # Visão Computacional e IA
 opencv-python-headless
-ultralytics==8.2.0
+ultralytics
 tensorflow[and-cuda]==2.16.1
 keras>=3.0
 
