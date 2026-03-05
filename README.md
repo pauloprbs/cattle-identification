@@ -20,7 +20,7 @@ A primeira etapa utiliza o modelo **YOLOv8-Pose**. O objetivo aqui não é apena
 
 > ![Esquema de Pontos Anatômicos - Keypoints](docs/imagens/cattle-keypoints.png)
 > *Figura 1: Mapeamento de Keypoints utilizados para extração de features geométricas.*
-* **Métrica de Sucesso (Performance da Pose):** O treinamento atingiu alta precisão na localização dos Keypoints, validada pela métrica *Object Keypoint Similarity* (OKS). Conforme os logs de validação final (Notebook 03), os resultados consolidados foram:
+* **Performance da detecção de Keypoints:** O treinamento atingiu alta precisão na localização dos Keypoints, validada pela métrica *Object Keypoint Similarity* (OKS). Conforme os logs de validação final (Notebook 03), os resultados consolidados foram:
     * **mAP50 (Pose):** **0.992** (Indica que em 99,2% das detecções, o esqueleto foi identificado corretamente dentro de uma margem padrão).
     * **mAP50-95 (Pose):** **0.881** (Métrica rigorosa que atesta a precisão média em múltiplos níveis de exigência; um valor de 88% é considerado excelente para aplicações biométricas em gado).
     * **Precision/Recall (Pose):** Estabilizados em **0.986** e **0.993**, respectivamente, garantindo que o modelo é extremamente confiável, sem gerar falsas detecções de pontos inexistentes.
