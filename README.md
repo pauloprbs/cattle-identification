@@ -1,17 +1,26 @@
 # Relatório Técnico: Sistema Híbrido de Visão Computacional para Identificação Individual Bovina
 
-**Nível:** Pós-Graduação em Inteligência Artificial / Visão Computacional
-
-## 1. Resumo Executivo
-Este documento detalha o desenvolvimento de um pipeline inteligente capaz de identificar vacas individualmente. O sistema utiliza uma abordagem de duas etapas: primeiro, a localização de marcos anatômicos (Keypoints) via **Deep Learning**, seguido por uma análise de **Geometria Computacional** e **Aprendizado Supervisionado** para a classificação de identidade.
+## 1. Resumo
+Este documento detalha o desenvolvimento de um pipeline capaz de identificar vacas individualmente. O sistema utiliza uma abordagem de duas etapas: primeiro, a localização de Keypoints que formam a estrutura anatômica dos bovinos via **Deep Learning**, seguido por uma análise de **Geometria Computacional** e **Aprendizado Supervisionado** para o reconhecimento individual das vacas.
 
 ---
 
 ## 2. Fase 1: Estimativa de Pose (Notebook 03)
 A primeira etapa utiliza o modelo **YOLOv8-Pose**. O objetivo aqui não é apenas detectar a vaca, mas extrair sua "assinatura estrutural".
 
-* **Configuração do Modelo:** Foi utilizado o modelo `yolov8n-pose.pt` (versão Nano), otimizado para ambientes com restrição de hardware (GTX 1650).
-* **Anotações Anatômicas:** O modelo foi treinado para identificar 8 pontos-chave (Cernelha, Dorso, Lombo, Garupa, Hooks e Pins).
+* **Configuração do Modelo:** Foi utilizado o modelo `yolov8n-pose.pt` (versão Nano), otimizado para ambientes com restrição de hardware.
+* **Anotações Anatômicas:** O modelo foi treinado para identificar 8 pontos-chave fundamentais para a biometria bovina. Abaixo, correlacionamos os termos em português com as marcações em inglês presentes na imagem de referência:
+    1. **Cernelha** (*Withers*)
+    2. **Dorso** (*Back*)
+    3. **Lombo** (*Loin*)
+    4. **Garupa/Anca** (*Hip/Hook*)
+    5. **Ponta do Ísquio** (*Pin Bone*)
+    6. **Inserção da Cauda** (*Tailhead*)
+    *Nota: Os pontos de Hooks e Pins são extraídos em suas vistas superiores (Up/Down) para permitir o cálculo de larguras pélvicas.*
+
+> **[INSIRA SUA IMAGEM AQUI]**
+> ![Esquema de Pontos Anatômicos - Keypoints](docs/imagens/cattle-keypoints.png)
+> *Figura 1: Mapeamento de marcos anatômicos utilizados para extração de features geométricas.*
 * **Métrica de Sucesso:** O treinamento atingiu alta precisão na localização dos pontos, permitindo que a próxima fase recebesse dados limpos.
 
 ---
