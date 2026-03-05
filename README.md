@@ -19,8 +19,12 @@ A primeira etapa utiliza o modelo **YOLOv8-Pose**. O objetivo aqui não é apena
     *Nota: Os pontos de Hooks e Pins são extraídos em suas vistas superiores (Up/Down) para permitir o cálculo de larguras pélvicas.*
 
 > ![Esquema de Pontos Anatômicos - Keypoints](docs/imagens/cattle-keypoints.png)
-> *Figura 1: Mapeamento de marcos anatômicos utilizados para extração de features geométricas.*
-* **Métrica de Sucesso:** O treinamento atingiu alta precisão na localização dos pontos, permitindo que a próxima fase recebesse dados limpos.
+> *Figura 1: Mapeamento de Keypoints utilizados para extração de features geométricas.*
+* **Métrica de Sucesso (Performance da Pose):** O treinamento atingiu alta precisão na localização dos Keypoints, validada pela métrica *Object Keypoint Similarity* (OKS). Conforme os logs de validação final (Notebook 03), os resultados consolidados foram:
+    * **mAP50 (Pose):** **0.992** (Indica que em 99,2% das detecções, o esqueleto foi identificado corretamente dentro de uma margem padrão).
+    * **mAP50-95 (Pose):** **0.881** (Métrica rigorosa que atesta a precisão média em múltiplos níveis de exigência; um valor de 88% é considerado excelente para aplicações biométricas em gado).
+    * **Precision/Recall (Pose):** Estabilizados em **0.986** e **0.993**, respectivamente, garantindo que o modelo é extremamente confiável, sem gerar falsas detecções de pontos inexistentes.
+    * **Box Precision/Recall:** A detecção do corpo do animal (Bounding Box) também apresentou performance superior, com **mAP50 de 0.994** e **mAP50-95 de 0.82**.
 
 ---
 
