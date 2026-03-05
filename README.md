@@ -18,7 +18,6 @@ A primeira etapa utiliza o modelo **YOLOv8-Pose**. O objetivo aqui não é apena
     6. **Inserção da Cauda** (*Tailhead*)
     *Nota: Os pontos de Hooks e Pins são extraídos em suas vistas superiores (Up/Down) para permitir o cálculo de larguras pélvicas.*
 
-> **[INSIRA SUA IMAGEM AQUI]**
 > ![Esquema de Pontos Anatômicos - Keypoints](docs/imagens/cattle-keypoints.png)
 > *Figura 1: Mapeamento de marcos anatômicos utilizados para extração de features geométricas.*
 * **Métrica de Sucesso:** O treinamento atingiu alta precisão na localização dos pontos, permitindo que a próxima fase recebesse dados limpos.
