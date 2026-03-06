@@ -35,10 +35,13 @@ Nesta etapa, transformamos os dados brutos de pixels e coordenadas $(x, y)$ em u
 A análise geométrica traduz a estrutura física do animal em métricas numéricas. Para garantir que o sistema identifique a mesma vaca independentemente da sua distância em relação à lente, aplicamos uma **Normalização por Escala Relativa**, utilizando o comprimento do dorso (distância entre *Withers* e *Tailhead*) como unidade de medida base.
 
 * **Cálculo de Angulação Óssea:** Utilizamos o conceito de álgebra linear para extrair ângulos entre os marcos anatômicos. Dado um vértice (ex: *Hip/Hook*), definimos dois vetores $\mathbf{u}$ e $\mathbf{v}$ apontando para os pontos adjacentes. O ângulo $\theta$ é extraído pelo produto escalar:
+
     $$\theta = \cos^{-1} \left( \frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{u}\| \|\mathbf{v}\|} \right)$$
+
     *Aplicação:* Identificar a inclinação da garupa e a angulação do jarrete, características únicas de cada indivíduo.
 
 * **Áreas Poligonais (Fórmula de Shoelace):** Para capturar a massa corporal e proporções pélvicas, calculamos a área de polígonos convexos formados pelos pontos *Hook*, *Pin* e *Tailhead*. A área $A$ é obtida por:
+
     $$A = \frac{1}{2} | \sum_{i=1}^{n-1} (x_i y_{i+1} - x_{i+1} y_i) |$$
 
 ### 3.2. Descritores de Aparência e Textura
