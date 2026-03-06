@@ -1,4 +1,4 @@
-# Relatório Técnico: Sistema Híbrido de Visão Computacional para Identificação Individual Bovina
+# Sistema Híbrido de Visão Computacional para Identificação Individual Bovina
 
 ## 1. Resumo
 Este documento detalha o desenvolvimento de um pipeline capaz de identificar vacas individualmente. O sistema utiliza uma abordagem de duas etapas: primeiro, a localização de Keypoints que formam a estrutura anatômica dos bovinos via **Deep Learning**, seguido por uma análise de **Geometria Computacional** e **Aprendizado Supervisionado** para o reconhecimento individual das vacas.
@@ -29,14 +29,32 @@ A primeira etapa utiliza o modelo **YOLOv8-Pose**. O objetivo aqui não é apena
 ---
 
 ## 3. Fase 2: Engenharia de Atributos Biométricos (Notebook 04)
-Nesta fase, as coordenadas $(x, y)$ dos pontos são transformadas em características que não dependem do ângulo da foto.
+Nesta etapa, transformamos os dados brutos de pixels e coordenadas $(x, y)$ em um vetor de características (*feature vector*) invariante a fatores externos como zoom e rotação da câmera.
 
-### 3.1. Geometria Pura
-Foram calculados ângulos de conformação e áreas de polígonos pélvicos. Matematicamente, utilizamos o produto escalar para extrair ângulos:
-$$\theta = \cos^{-1} \left( \frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{u}\| \|\mathbf{v}\|} \right)$$
+### 3.1. Biometria Geométrica e Morfometria
+A análise geométrica traduz a estrutura física do animal em métricas numéricas. Para garantir que o sistema identifique a mesma vaca independentemente da sua distância em relação à lente, aplicamos uma **Normalização por Escala Relativa**, utilizando o comprimento do dorso (distância entre *Withers* e *Tailhead*) como unidade de medida base.
 
-### 3.2. Descritores de Textura (LBP)
-Além da geometria, o projeto utiliza **Local Binary Patterns (LBP)** para capturar o padrão de rugosidade ou pelagem, transformando a imagem em um histograma numérico que complementa os dados geométricos.
+* **Cálculo de Angulação Óssea:** Utilizamos o conceito de álgebra linear para extrair ângulos entre os marcos anatômicos. Dado um vértice (ex: *Hip/Hook*), definimos dois vetores $\mathbf{u}$ e $\mathbf{v}$ apontando para os pontos adjacentes. O ângulo $\theta$ é extraído pelo produto escalar:
+    $$\theta = \cos^{-1} \left( \frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{u}\| \|\mathbf{v}\|} \right)$$
+    *Aplicação:* Identificar a inclinação da garupa e a angulação do jarrete, características únicas de cada indivíduo.
+
+* **Áreas Poligonais (Fórmula de Shoelace):** Para capturar a massa corporal e proporções pélvicas, calculamos a área de polígonos convexos formados pelos pontos *Hook*, *Pin* e *Tailhead*. A área $A$ é obtida por:
+    $$A = \frac{1}{2} | \sum_{i=1}^{n-1} (x_i y_{i+1} - x_{i+1} y_i) |$$
+
+### 3.2. Descritores de Aparência e Textura
+Para complementar a geometria (que descreve o "esqueleto"), o sistema utiliza descritores clássicos de visão computacional para descrever a "superfície" (pelagem e musculatura).
+
+* **Local Binary Patterns (LBP):** O LBP é utilizado para extrair a textura da pelagem. O algoritmo compara cada pixel com sua vizinhança, gerando um código binário que descreve micro-padrões (bordas, manchas, rugosidade). No projeto, geramos um **Histograma LBP**, que serve como uma assinatura estatística da distribuição de texturas na imagem, sendo altamente resistente a variações de iluminação.
+
+* **Histogram of Oriented Gradients (HOG):** Enquanto o LBP foca na textura fina, o HOG foca na estrutura de forma e contorno. Ele calcula a distribuição das orientações dos gradientes de intensidade (mudanças de cor) em partes localizadas da imagem. 
+    * **Funcionamento:** A imagem é dividida em pequenas células, e para cada célula é computado um histograma de direções de gradiente. Isso captura o "formato" dos músculos e a curvatura do animal, sendo um descritor poderoso para distinguir silhuetas muito similares.
+
+### 3.3. Fusão Híbrida de Dados
+O diferencial desta fase é a **Concatenação de Features**. O vetor final alimentado nos modelos (MLP e Siamesas) é a união de:
+1.  **Vetor Geométrico:** Proporções e ângulos (35 colunas).
+2.  **Vetor HOG/LBP:** Descritores estatísticos de aparência.
+
+Esta abordagem híbrida permite que o modelo aprenda que a "Vaca A" não é apenas um conjunto de ângulos pélvicos, mas também possui um padrão de gradiente de pelagem específico na região do lombo.
 
 ---
 
